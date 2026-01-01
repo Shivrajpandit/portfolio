@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/theme.dart';
 import '../../../../utils/constants.dart';
 
 class AnimatedNameText extends StatelessWidget {

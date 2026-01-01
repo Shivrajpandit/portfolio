@@ -71,7 +71,7 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Layer
+          // Gradient Background Layer
           Positioned.fill(
             child: Container(
               decoration: const BoxDecoration(
@@ -79,67 +79,109 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFF0A192F), // Theme Secondary
-                    Color(0xFF020c1b), // Deep Dark Navy
+                    Color(0xFF0A192F), // Dark Navy
+                    Color(0xFF020c1b), // Deeper Navy
+                    Color(0xFF0D1B2A), // Dark Blue
+                  ],
+                  stops: [0.0, 0.5, 1.0],
+                ),
+              ),
+            ),
+          ),
+
+          // Mesh Gradient Overlay
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.topRight,
+                  radius: 1.5,
+                  colors: [
+                    AppTheme.primaryColor.withOpacity(0.08),
+                    Colors.transparent,
                   ],
                 ),
               ),
             ),
           ),
-          // Dark Overlay for contrast
-          Positioned.fill(
-            child: Container(color: Colors.black.withOpacity(0.7)),
-          ),
 
-          // Animated Particles Layer
+          // Animated Background Layer (Particles, Orbs, Waves)
           const Positioned.fill(
             child: IgnorePointer(child: AnimatedBackground()),
           ),
-          // Decorative Glow 1 (Top Right)
+
+          // Decorative Glow 1 (Top Right) - Enhanced
           Positioned(
-            top: -100,
-            right: -100,
+            top: -150,
+            right: -150,
             child: Container(
-              width: 600,
-              height: 600,
+              width: 700,
+              height: 700,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppTheme.primaryColor.withOpacity(0.15),
+                    AppTheme.primaryColor.withOpacity(0.2),
+                    AppTheme.primaryColor.withOpacity(0.1),
                     Colors.transparent,
                   ],
-                  stops: const [0.0, 0.6],
+                  stops: const [0.0, 0.4, 1.0],
                 ),
               ),
             ),
           ),
-          // Decorative Glow 2 (Bottom Left)
+
+          // Decorative Glow 2 (Bottom Left) - Enhanced
           Positioned(
-            bottom: -100,
-            left: -100,
+            bottom: -150,
+            left: -150,
             child: Container(
-              width: 600,
-              height: 600,
+              width: 700,
+              height: 700,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    const Color(0xFF8892B0).withOpacity(0.1), // Subtext color
+                    Colors.purpleAccent.withOpacity(0.15),
+                    Colors.purpleAccent.withOpacity(0.08),
                     Colors.transparent,
                   ],
-                  stops: const [0.0, 0.6],
+                  stops: const [0.0, 0.4, 1.0],
                 ),
               ),
             ),
           ),
+
+          // Decorative Glow 3 (Center) - New
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.4,
+            left: MediaQuery.of(context).size.width * 0.3,
+            child: Container(
+              width: 500,
+              height: 500,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    const Color(0xFFFF6B9D).withOpacity(0.12),
+                    const Color(0xFFFF6B9D).withOpacity(0.05),
+                    Colors.transparent,
+                  ],
+                  stops: const [0.0, 0.5, 1.0],
+                ),
+              ),
+            ),
+          ),
+
+          // Grid Pattern Overlay (Subtle)
+          Positioned.fill(child: CustomPaint(painter: GridPainter())),
+
           // Content Layer
           Positioned.fill(
             child: SingleChildScrollView(
               controller: _scrollController,
               child: Column(
                 children: [
-                  // Add padding top to account for navbar height
                   EntranceFader(
                     delay: const Duration(milliseconds: 100),
                     child: HomeScreen(key: _homeKey),
@@ -185,16 +227,24 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
             ),
           ),
 
-          // Navbar Layer (Glassmorphism)
+          // Navbar Layer (Enhanced Glassmorphism)
           Positioned(
             top: 0,
             left: 0,
             right: 0,
             child: ClipRRect(
               child: BackdropFilter(
-                filter: ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                filter: ui.ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
                 child: Container(
-                  color: const Color(0xFF0A192F).withOpacity(0.85),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0A192F).withOpacity(0.8),
+                    border: Border(
+                      bottom: BorderSide(
+                        color: AppTheme.primaryColor.withOpacity(0.1),
+                        width: 1,
+                      ),
+                    ),
+                  ),
                   child: TopNavigationBar(onNavClick: _scrollToSection),
                 ),
               ),
@@ -204,4 +254,29 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
       ),
     );
   }
+}
+
+// Grid Pattern Painter
+class GridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.white.withOpacity(0.02)
+      ..strokeWidth = 1.0;
+
+    const gridSize = 50.0;
+
+    // Draw vertical lines
+    for (double x = 0; x < size.width; x += gridSize) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+    }
+
+    // Draw horizontal lines
+    for (double y = 0; y < size.height; y += gridSize) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

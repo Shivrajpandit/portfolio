@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/theme.dart';
 import '../../../../shared/widgets/hover_scale_card.dart';
 
 class SkillCard extends StatelessWidget {

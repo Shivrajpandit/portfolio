@@ -23,14 +23,30 @@ class HomeTextContent extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 50),
       decoration: BoxDecoration(
-        color: const Color(0xFF112240).withOpacity(0.3),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            const Color(0xFF112240).withOpacity(0.4),
+            const Color(0xFF1A2F5A).withOpacity(0.3),
+            const Color(0xFF0D1B2A).withOpacity(0.4),
+          ],
+        ),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Colors.white.withOpacity(0.08)),
+        border: Border.all(
+          width: 1.5,
+          color: AppTheme.primaryColor.withOpacity(0.2),
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 20,
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 30,
             spreadRadius: 5,
+          ),
+          BoxShadow(
+            color: AppTheme.primaryColor.withOpacity(0.15),
+            blurRadius: 50,
+            spreadRadius: -5,
           ),
         ],
       ),
