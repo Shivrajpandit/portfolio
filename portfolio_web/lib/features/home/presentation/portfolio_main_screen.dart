@@ -7,7 +7,6 @@ import '../../experience/presentation/experience_screen.dart';
 import '../../projects/presentation/projects_screen.dart';
 import '../../skills/presentation/skills_screen.dart';
 import 'home_screen.dart';
-import '../../../shared/widgets/entrance_fader.dart';
 import '../../../shared/widgets/top_navigation_bar.dart';
 
 class PortfolioMainScreen extends StatefulWidget {
@@ -104,71 +103,72 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
             ),
           ),
 
-          // Decorative Glow 1 (Top Right) - Enhanced
+          // Decorative Glow 1 (Top Right)
           Positioned(
-            top: -150,
-            right: -150,
+            top: -200,
+            right: -100,
             child: Container(
-              width: 700,
-              height: 700,
+              width: 800,
+              height: 800,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppTheme.primaryColor.withOpacity(0.2),
-                    AppTheme.primaryColor.withOpacity(0.1),
+                    AppTheme.primaryColor.withOpacity(0.12),
+                    AppTheme.accentColor.withOpacity(0.05),
                     Colors.transparent,
                   ],
-                  stops: const [0.0, 0.4, 1.0],
                 ),
               ),
             ),
           ),
 
-          // Decorative Glow 2 (Bottom Left) - Enhanced
+          // Decorative Glow 2 (Bottom Left)
           Positioned(
-            bottom: -150,
-            left: -150,
+            bottom: -200,
+            left: -100,
             child: Container(
-              width: 700,
-              height: 700,
+              width: 800,
+              height: 800,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    Colors.purpleAccent.withOpacity(0.15),
-                    Colors.purpleAccent.withOpacity(0.08),
+                    AppTheme.purpleAccent.withOpacity(0.1),
+                    AppTheme.pinkAccent.withOpacity(0.05),
                     Colors.transparent,
                   ],
-                  stops: const [0.0, 0.4, 1.0],
                 ),
               ),
             ),
           ),
 
-          // Decorative Glow 3 (Center) - New
+          // Decorative Glow 3 (Center Right)
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.4,
-            left: MediaQuery.of(context).size.width * 0.3,
+            top: MediaQuery.of(context).size.height * 0.2,
+            right: MediaQuery.of(context).size.width * 0.1,
             child: Container(
-              width: 500,
-              height: 500,
+              width: 600,
+              height: 600,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    const Color(0xFFFF6B9D).withOpacity(0.12),
-                    const Color(0xFFFF6B9D).withOpacity(0.05),
+                    AppTheme.accentColor.withOpacity(0.08),
                     Colors.transparent,
                   ],
-                  stops: const [0.0, 0.5, 1.0],
                 ),
               ),
             ),
           ),
 
-          // Grid Pattern Overlay (Subtle)
-          Positioned.fill(child: CustomPaint(painter: GridPainter())),
+          // Grid Pattern Overlay
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.4,
+              child: CustomPaint(painter: GridPainter()),
+            ),
+          ),
 
           // Content Layer
           Positioned.fill(
@@ -177,31 +177,16 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
               child: Column(
                 children: [
                   HomeScreen(key: _homeKey),
-                  EntranceFader(
-                    offset: const Offset(0, 50),
-                    delay: const Duration(milliseconds: 200),
-                    child: AboutScreen(key: _aboutKey),
-                  ),
-                  EntranceFader(
-                    offset: const Offset(0, 50),
-                    delay: const Duration(milliseconds: 300),
-                    child: SkillsScreen(key: _skillsKey),
-                  ),
-                  EntranceFader(
-                    offset: const Offset(0, 50),
-                    delay: const Duration(milliseconds: 400),
-                    child: ExperienceScreen(key: _experienceKey),
-                  ),
-                  EntranceFader(
-                    offset: const Offset(0, 50),
-                    delay: const Duration(milliseconds: 500),
-                    child: ProjectsScreen(key: _projectsKey),
-                  ),
-                  EntranceFader(
-                    offset: const Offset(0, 50),
-                    delay: const Duration(milliseconds: 600),
-                    child: ContactScreen(key: _contactKey),
-                  ),
+                  const SizedBox(height: 100),
+                  AboutScreen(key: _aboutKey),
+                  const SizedBox(height: 100),
+                  SkillsScreen(key: _skillsKey),
+                  const SizedBox(height: 100),
+                  ExperienceScreen(key: _experienceKey),
+                  const SizedBox(height: 100),
+                  ProjectsScreen(key: _projectsKey),
+                  const SizedBox(height: 100),
+                  ContactScreen(key: _contactKey),
                   // Footer
                   Container(
                     color: const Color(0xFF020c1b),

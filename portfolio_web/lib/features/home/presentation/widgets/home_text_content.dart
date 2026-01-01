@@ -1,3 +1,4 @@
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import '../../../../core/theme/theme.dart';
 import 'greeting_badge.dart';
@@ -21,59 +22,58 @@ class HomeTextContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 50),
+      constraints: const BoxConstraints(maxWidth: 800),
+      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 60),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            const Color(0xFF112240).withOpacity(0.4),
-            const Color(0xFF1A2F5A).withOpacity(0.3),
-            const Color(0xFF0D1B2A).withOpacity(0.4),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(30),
+        color: const Color(0xFF112240).withOpacity(0.3),
+        borderRadius: BorderRadius.circular(40),
         border: Border.all(
           width: 1.5,
-          color: AppTheme.primaryColor.withOpacity(0.2),
+          color: AppTheme.primaryColor.withOpacity(0.15),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 30,
-            spreadRadius: 5,
+            color: Colors.black.withOpacity(0.4),
+            blurRadius: 40,
+            offset: const Offset(0, 20),
           ),
           BoxShadow(
-            color: AppTheme.primaryColor.withOpacity(0.15),
-            blurRadius: 50,
-            spreadRadius: -5,
+            color: AppTheme.primaryColor.withOpacity(0.05),
+            blurRadius: 60,
+            spreadRadius: -10,
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: textAlign,
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const GreetingBadge(),
-          const SizedBox(height: 10),
-          AnimatedNameText(textAlign: textAlign),
-          const SizedBox(height: 20),
-          TypingTextDisplay(displayText: displayText, textAlign: textAlign),
-          const SizedBox(height: 40),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 30,
-            runSpacing: 20,
-            alignment: textAlign == CrossAxisAlignment.center
-                ? WrapAlignment.center
-                : WrapAlignment.start,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(40),
+        child: BackdropFilter(
+          filter: ui.ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Column(
+            crossAxisAlignment: textAlign,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              ContactButton(onPressed: onContactPressed),
-              const SocialIconsRow(),
+              const GreetingBadge(),
+              const SizedBox(height: 15),
+              AnimatedNameText(textAlign: textAlign),
+              const SizedBox(height: 25),
+              TypingTextDisplay(displayText: displayText, textAlign: textAlign),
+              const SizedBox(height: 45),
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 30,
+                runSpacing: 25,
+                alignment: textAlign == CrossAxisAlignment.center
+                    ? WrapAlignment.center
+                    : WrapAlignment.start,
+                children: [
+                  ContactButton(onPressed: onContactPressed),
+                  const SocialIconsRow(),
+                ],
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

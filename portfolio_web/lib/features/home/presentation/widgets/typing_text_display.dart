@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/theme/theme.dart';
 
 class TypingTextDisplay extends StatelessWidget {
   final String displayText;
@@ -14,12 +15,11 @@ class TypingTextDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       displayText,
-      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-        color: const Color(0xFFCCD6F6),
-        fontWeight: FontWeight.w500,
-        fontSize: 28,
-        height: 1.2,
-        letterSpacing: 1.2,
+      style: Theme.of(context).textTheme.displayMedium?.copyWith(
+        fontSize: 26,
+        color: AppTheme.textColor.withOpacity(0.9),
+        fontWeight: FontWeight.w400,
+        letterSpacing: 1.0,
       ),
       textAlign: textAlign == CrossAxisAlignment.center
           ? TextAlign.center

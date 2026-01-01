@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../utils/constants.dart';
+import '../../../../core/theme/theme.dart';
 
 class AnimatedNameText extends StatelessWidget {
   final CrossAxisAlignment textAlign;
@@ -9,26 +9,22 @@ class AnimatedNameText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
-      shaderCallback: (bounds) => const LinearGradient(
+      shaderCallback: (bounds) => LinearGradient(
         colors: [
-          Color(0xFF64FFDA), // Bright Teal
-          Color(0xFF00BFA5), // Darker Teal
-          Colors.purpleAccent,
-          Colors.deepPurple,
+          AppTheme.primaryColor,
+          AppTheme.accentColor,
+          AppTheme.purpleAccent,
+          AppTheme.pinkAccent,
         ],
         stops: [0.0, 0.3, 0.7, 1.0],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ).createShader(bounds),
       child: Text(
-        Constants.name.toUpperCase(),
-        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 90,
-          color: Colors.white,
-          fontWeight: FontWeight.w900,
-          height: 0.9,
-          letterSpacing: -2.0,
-        ),
+        "SHIVRAJ\nPANDIT",
+        style: Theme.of(
+          context,
+        ).textTheme.displayLarge?.copyWith(height: 0.9, fontSize: 100),
         textAlign: textAlign == CrossAxisAlignment.center
             ? TextAlign.center
             : TextAlign.start,
