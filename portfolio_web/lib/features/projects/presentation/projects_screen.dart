@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../utils/constants.dart';
 import '../../../shared/widgets/fade_in_animation.dart';
-import 'controllers/projects_controller.dart';
-import 'widgets/category_filter_chip.dart';
 import 'widgets/project_card.dart';
 
 class ProjectsScreen extends StatefulWidget {
@@ -13,58 +11,37 @@ class ProjectsScreen extends StatefulWidget {
 }
 
 class _ProjectsScreenState extends State<ProjectsScreen> {
-  final ProjectsController _controller = ProjectsController();
-
   @override
   Widget build(BuildContext context) {
-    final filteredProjects = _controller.getFilteredProjects(
-      Constants.projects,
-    );
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 40),
+      padding: const EdgeInsets.symmetric(vertical: 60),
       alignment: Alignment.center,
       child: Container(
         constraints: const BoxConstraints(maxWidth: 1200),
-        padding: const EdgeInsets.symmetric(horizontal: 40),
+        padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 40),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Projects",
+              "All Projects",
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 60),
 
-            // Filter Tabs
-            Wrap(
-              spacing: 15,
-              children: _controller.categories.map((category) {
-                final bool isSelected =
-                    _controller.selectedCategory == category;
-                return CategoryFilterChip(
-                  category: category,
-                  isSelected: isSelected,
-                  onTap: () {
-                    setState(() {
-                      _controller.updateCategory(category);
-                    });
-                  },
-                );
-              }).toList(),
-            ),
-            const SizedBox(height: 40),
-
-            // Projects Grid
+            // Projects Grid - Centered
             Wrap(
               spacing: 30,
-              runSpacing: 30,
-              alignment: WrapAlignment.start,
-              children: filteredProjects
+              runSpacing: 40,
+              alignment: WrapAlignment.center,
+              children: Constants.projects
                   .asMap()
                   .entries
                   .map(

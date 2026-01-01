@@ -17,6 +17,9 @@ class _ProjectCardState extends State<ProjectCard> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardWidth = screenWidth < 450 ? screenWidth * 0.85 : 350.0;
+
     return MouseRegion(
       onEnter: (_) => setState(() => isHovered = true),
       onExit: (_) => setState(() => isHovered = false),
@@ -24,27 +27,33 @@ class _ProjectCardState extends State<ProjectCard> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut,
         transform: Matrix4.identity()..translate(0.0, isHovered ? -10.0 : 0.0),
-        width: 350,
-        height: 380,
+        width: cardWidth,
+        constraints: const BoxConstraints(minHeight: 380, maxHeight: 480),
         decoration: BoxDecoration(
           color: AppTheme.cardColor,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(20),
           border: isHovered
-              ? Border.all(color: AppTheme.primaryColor, width: 2)
-              : Border.all(color: Colors.transparent, width: 2),
-          boxShadow: isHovered
-              ? [
-                  BoxShadow(
-                    color: AppTheme.primaryColor.withOpacity(0.3),
-                    blurRadius: 25,
-                    spreadRadius: 5,
-                    offset: const Offset(0, 15),
-                  ),
-                ]
-              : [],
+              ? Border.all(
+                  color: AppTheme.primaryColor.withOpacity(0.5),
+                  width: 2,
+                )
+              : Border.all(color: Colors.white.withOpacity(0.05), width: 1.5),
+          boxShadow: [
+            if (isHovered)
+              BoxShadow(
+                color: AppTheme.primaryColor.withOpacity(0.15),
+                blurRadius: 30,
+                offset: const Offset(0, 15),
+              ),
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _buildHeader(),
             Expanded(
@@ -54,7 +63,7 @@ class _ProjectCardState extends State<ProjectCard> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 25),
               child: _buildActionButtons(),
             ),
           ],
