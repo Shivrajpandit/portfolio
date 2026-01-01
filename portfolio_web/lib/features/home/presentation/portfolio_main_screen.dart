@@ -9,7 +9,6 @@ import '../../skills/presentation/skills_screen.dart';
 import 'home_screen.dart';
 import '../../../shared/widgets/entrance_fader.dart';
 import '../../../shared/widgets/top_navigation_bar.dart';
-import '../../../shared/widgets/animated_background.dart';
 
 class PortfolioMainScreen extends StatefulWidget {
   const PortfolioMainScreen({super.key});
@@ -105,11 +104,6 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
             ),
           ),
 
-          // Animated Background Layer (Particles, Orbs, Waves)
-          const Positioned.fill(
-            child: IgnorePointer(child: AnimatedBackground()),
-          ),
-
           // Decorative Glow 1 (Top Right) - Enhanced
           Positioned(
             top: -150,
@@ -182,10 +176,7 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
               controller: _scrollController,
               child: Column(
                 children: [
-                  EntranceFader(
-                    delay: const Duration(milliseconds: 100),
-                    child: HomeScreen(key: _homeKey),
-                  ),
+                  HomeScreen(key: _homeKey),
                   EntranceFader(
                     offset: const Offset(0, 50),
                     delay: const Duration(milliseconds: 200),

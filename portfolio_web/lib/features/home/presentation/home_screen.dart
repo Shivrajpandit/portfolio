@@ -10,16 +10,13 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> {
   late final HomeController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = HomeController();
-    _controller.initializeAnimations(this);
-    _controller.startTyping(() => setState(() {}), () => mounted);
   }
 
   @override
@@ -57,11 +54,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
                 const SizedBox(width: 40),
-                Expanded(
-                  child: HomeProfileImage(
-                    animation: _controller.floatAnimation!,
-                  ),
-                ),
+                const Expanded(child: HomeProfileImage()),
               ],
             );
           } else {
@@ -70,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 100),
-                HomeProfileImage(animation: _controller.floatAnimation!),
+                const HomeProfileImage(),
                 const SizedBox(height: 40),
                 HomeTextContent(
                   displayText: _controller.displayText,
