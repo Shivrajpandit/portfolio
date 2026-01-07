@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../utils/constants.dart';
 
@@ -31,8 +32,11 @@ class SocialIconsRow extends StatelessWidget {
                 color: Color(0xFF0A192F),
               ),
               child: IconButton(
-                onPressed: () {
-                  // TODO: Navigate to social link
+                onPressed: () async {
+                  final Uri url = Uri.parse(social['url']);
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  }
                 },
                 icon: Icon(social['icon'], size: 20, color: Colors.white70),
                 hoverColor: AppTheme.primaryColor.withOpacity(0.1),

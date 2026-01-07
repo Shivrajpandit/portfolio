@@ -4,7 +4,8 @@ import 'widgets/home_text_content.dart';
 import 'widgets/home_profile_image.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final VoidCallback? onContactPressed;
+  const HomeScreen({super.key, this.onContactPressed});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -26,8 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _handleContactPress() {
-    // TODO: Navigate to contact section or open contact dialog
-    debugPrint('Contact button pressed');
+    if (widget.onContactPressed != null) {
+      widget.onContactPressed!();
+    } else {
+      debugPrint('Contact button pressed but no callback provided');
+    }
   }
 
   @override

@@ -176,7 +176,10 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
               controller: _scrollController,
               child: Column(
                 children: [
-                  HomeScreen(key: _homeKey),
+                  HomeScreen(
+                    key: _homeKey,
+                    onContactPressed: () => _scrollToSection('contact'),
+                  ),
                   const SizedBox(height: 100),
                   AboutScreen(key: _aboutKey),
                   const SizedBox(height: 100),
