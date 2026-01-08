@@ -102,7 +102,7 @@ class Constants {
     {
       "role": "Junior Flutter Developer",
       "company": "MHTECHIN",
-      "period": "Sept 2024 - Present",
+      "period": "Sept 2025 - Present",
       "description":
           "Developing cross-platform mobile applications using Flutter. Collaborating with the design and backend teams to deliver high-quality products.",
       "color": Color(0xFF64FFDA), // Cyan
@@ -112,7 +112,7 @@ class Constants {
       "company": "Internship + Full-Time",
       "period": "June - Aug",
       "description":
-          "Worked on native Android development using Kotlin/Java. Assisted in bug fixing and feature implementation.",
+          "Worked on native Android development using Flutter/Dart. Assisted in bug fixing and feature implementation.",
       "color": Color(0xFF64FFDA), // Cyan
     },
   ];

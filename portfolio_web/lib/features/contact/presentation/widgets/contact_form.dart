@@ -27,12 +27,12 @@ class _ContactFormState extends State<ContactForm> {
   Future<void> _handleSubmit() async {
     setState(() => _controller.isLoading = true);
 
-    final success = await _controller.sendMessage();
+    final errorMessage = await _controller.sendMessage();
 
     if (mounted) {
       setState(() => _controller.isLoading = false);
 
-      if (success) {
+      if (errorMessage == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text("Message Sent Successfully!"),
@@ -41,11 +41,14 @@ class _ContactFormState extends State<ContactForm> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            action: SnackBarAction(
-              label: 'Dismiss',
-              textColor: Colors.black,
-              onPressed: () {},
-            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Error: $errorMessage"),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
           ),
         );
       }

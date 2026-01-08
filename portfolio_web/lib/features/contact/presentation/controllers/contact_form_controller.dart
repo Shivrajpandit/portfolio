@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ContactFormController {
   final formKey = GlobalKey<FormState>();
@@ -9,21 +10,41 @@ class ContactFormController {
   final TextEditingController subjectController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
 
-  Future<bool> sendMessage() async {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<String?> sendMessage() async {
     if (!formKey.currentState!.validate()) {
-      return false;
+      return "Validation failed";
     }
 
-    // Simulate network request
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final Map<String, dynamic> data = {
+        'name': nameController.text.trim(),
+        'email': emailController.text.trim(),
+        'subject': subjectController.text.trim(),
+        'message': messageController.text.trim(),
+        'timestamp': FieldValue.serverTimestamp(),
+      };
 
-    // Clear form
-    nameController.clear();
-    emailController.clear();
-    subjectController.clear();
-    messageController.clear();
+      await _firestore
+          .collection('contacts')
+          .add(data)
+          .timeout(
+            const Duration(seconds: 7),
+            onTimeout: () =>
+                throw 'Connection Timeout. Please check your internet or Firebase Console.',
+          );
 
-    return true;
+      nameController.clear();
+      emailController.clear();
+      subjectController.clear();
+      messageController.clear();
+
+      return null; // Success
+    } catch (e) {
+      debugPrint('Error: $e');
+      return e.toString();
+    }
   }
 
   void dispose() {
