@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Contacts collection madhe konala hi message pathvnyachi permission dya
+    match /contacts/{document} {
+      allow create: if true;
+      allow read: if false; // Privacy sathi read block kara
+    }
+  }
+}
