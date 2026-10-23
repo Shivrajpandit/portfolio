@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/theme.dart';
+import 'core/theme/theme_manager.dart';
 
 void main() async {
   try {
@@ -13,7 +14,7 @@ void main() async {
     );
     debugPrint('Firebase initialized successfully!');
   } catch (e) {
-    debugPrint('Firebase initialization failed: $e');
+    debugPrint('Firebase initialization note: $e');
   }
 
   runApp(const MyApp());
@@ -24,11 +25,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Portfolio',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
-      routerConfig: AppRouter.router,
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: ThemeManager.instance.themeModeNotifier,
+      builder: (context, currentMode, _) {
+        return MaterialApp.router(
+          title: 'Shivraj Pandit | AI & Data Science • Software Developer',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: currentMode,
+          routerConfig: AppRouter.router,
+        );
+      },
     );
   }
 }

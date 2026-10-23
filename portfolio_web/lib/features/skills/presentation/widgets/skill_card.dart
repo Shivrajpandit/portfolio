@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../shared/widgets/hover_scale_card.dart';
 
 class SkillCard extends StatelessWidget {
   final String name;
-  final IconData icon;
+  final dynamic icon;
   final Color iconColor;
 
   const SkillCard({
@@ -26,7 +27,9 @@ class SkillCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: iconColor, size: 30),
+            icon is IconData
+                ? Icon(icon as IconData, color: iconColor, size: 30)
+                : FaIcon(icon as FaIconData, color: iconColor, size: 30),
             const SizedBox(height: 10),
             Text(
               name,

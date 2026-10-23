@@ -57,8 +57,9 @@ class _ContactFormState extends State<ContactForm> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 500;
     return Container(
-      padding: const EdgeInsets.all(40),
+      padding: EdgeInsets.all(isMobile ? 20 : 40),
       decoration: BoxDecoration(
         color: const Color(0xFF112240).withOpacity(0.5),
         borderRadius: BorderRadius.circular(20),

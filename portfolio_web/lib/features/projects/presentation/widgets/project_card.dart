@@ -210,7 +210,7 @@ class _ProjectCardState extends State<ProjectCard> {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(FontAwesomeIcons.github, size: 16, color: Colors.white),
+                  FaIcon(FontAwesomeIcons.github, size: 16, color: Colors.white),
                   SizedBox(width: 8),
                   Text(
                     "GitHub",

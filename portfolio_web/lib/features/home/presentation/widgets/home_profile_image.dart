@@ -66,7 +66,7 @@ class HomeProfileImage extends StatelessWidget {
                 colors: [
                   AppTheme.primaryColor,
                   AppTheme.purpleAccent,
-                  AppTheme.pinkAccent,
+                  AppTheme.coralAccent,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -89,7 +89,7 @@ class HomeProfileImage extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: AppTheme.backgroundNavy, width: 5),
                 image: const DecorationImage(
-                  image: AssetImage("assets/images/user_profile.png"),
+                  image: AssetImage("assets/images/profile.jpeg"),
                   fit: BoxFit.cover,
                   alignment: Alignment.topCenter,
                 ),

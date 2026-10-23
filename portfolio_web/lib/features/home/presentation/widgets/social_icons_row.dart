@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../utils/constants.dart';
@@ -38,7 +39,9 @@ class SocialIconsRow extends StatelessWidget {
                     await launchUrl(url);
                   }
                 },
-                icon: Icon(social['icon'], size: 20, color: Colors.white70),
+                icon: social['icon'] is IconData
+                    ? Icon(social['icon'] as IconData, size: 20, color: Colors.white70)
+                    : FaIcon(social['icon'] as FaIconData, size: 20, color: Colors.white70),
                 hoverColor: AppTheme.primaryColor.withOpacity(0.1),
                 splashRadius: 24,
               ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../core/theme/theme.dart';
 
 class ContactInfoItem extends StatelessWidget {
-  final IconData icon;
+  final dynamic icon;
   final String title;
   final String content;
   final VoidCallback onTap;
@@ -31,7 +32,9 @@ class ContactInfoItem extends StatelessWidget {
                 color: AppTheme.cardColor,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(icon, color: AppTheme.primaryColor, size: 24),
+              child: icon is IconData
+                  ? Icon(icon as IconData, color: AppTheme.primaryColor, size: 24)
+                  : FaIcon(icon as FaIconData, color: AppTheme.primaryColor, size: 24),
             ),
             const SizedBox(width: 20),
             Column(
